@@ -1,0 +1,56 @@
+using System;
+
+namespace ConsoleApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите основание (a):");
+            int a = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Введите показатель степени (n):");
+            int n = int.Parse(Console.ReadLine());
+
+            int result = Power(a, n);
+            Console.WriteLine($"Результат вычисления {a}^{n} = {result}");
+
+            Console.WriteLine("\nВведите число x (x >= 100):");
+            int x = int.Parse(Console.ReadLine());
+
+            int foundN = FindN(x);
+            Console.WriteLine($"Число n, полученное из числа {x} = {foundN}");
+
+            Console.ReadLine(); 
+        }
+
+        static int Power(int a, int n)
+        {
+            if (n == 0)
+                return 1;
+            else if (n == 1)
+                return a;
+            else
+                return Multiply(a, Power(a, n - 1));
+        }
+
+        static int Multiply(int a, int b)
+        {
+            int result = 0;
+            for (int i = 0; i < b; i++)
+            {
+                result += a;
+            }
+            return result;
+        }
+
+        static int FindN(int x)
+        {
+            string xStr = x.ToString();
+            int secondDigit = int.Parse(xStr[1].ToString()); 
+            string xWithoutSecondDigit = xStr.Remove(1, 1); 
+            string nStr = xWithoutSecondDigit + secondDigit; 
+            return int.Parse(nStr);
+        }
+    }
+}
